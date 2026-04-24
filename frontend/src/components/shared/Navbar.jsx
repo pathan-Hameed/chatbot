@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { NavLink, Link, useNavigate } from "react-router-dom";
-import { NAV_LINKS, APP_NAME } from "@lib/constants";
+import { Link, useNavigate } from "react-router-dom";
+import { APP_NAME } from "@lib/constants";
 import { useAuth } from "@store/authStore";
 import { authAPI } from "@services/api";
 
@@ -21,27 +21,15 @@ export default function Navbar() {
   };
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-gray-200 bg-white/95 backdrop-blur">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
+    <header className="sticky top-0 z-50 w-full bg-white/95 backdrop-blur mt-4 ">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6   flex items-center justify-between ">
         <Link to="/" className="font-bold text-xl tracking-tight text-gray-900">
           {APP_NAME}
         </Link>
 
         {/* Desktop */}
         <nav className="hidden md:flex items-center gap-4">
-          {NAV_LINKS.map((link) => (
-            <NavLink
-              key={link.to}
-              to={link.to}
-              className={({ isActive }) =>
-                `text-sm font-medium transition-colors hover:text-black
-                ${isActive ? "text-black" : "text-gray-500"}`
-              }
-            >
-              {link.label}
-            </NavLink>
-          ))}
-
+          
           {!isAuthenticated ? (
             <>
               <Link
@@ -92,19 +80,7 @@ export default function Navbar() {
       {/* Mobile Menu */}
       {menuOpen && (
         <div className="md:hidden border-t border-gray-200 bg-white px-4 py-4 flex flex-col gap-1">
-          {NAV_LINKS.map((link) => (
-            <NavLink
-              key={link.to}
-              to={link.to}
-              onClick={() => setMenuOpen(false)}
-              className={({ isActive }) =>
-                `px-3 py-2.5 text-sm font-medium rounded-md transition-colors
-                ${isActive ? "bg-gray-100 text-black" : "text-gray-500 hover:bg-gray-50"}`
-              }
-            >
-              {link.label}
-            </NavLink>
-          ))}
+
           <Link
             to="/contact"
             onClick={() => setMenuOpen(false)}

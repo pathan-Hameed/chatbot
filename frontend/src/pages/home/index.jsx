@@ -4,6 +4,7 @@ import { useState } from "react";
 import ChatWindow from "./components/ChatWindow";
 import ChatInput from "./components/ChatInput";
 import axiosInstance from "../../services/axiosInstance";
+import Navbar from "@/components/shared/Navbar";
 
 const Home = () => {
   // Stores entire chat conversation
@@ -20,18 +21,11 @@ const Home = () => {
 
     setLoading(true);
 
-    
-      console.log("user input:",text);
-      console.log("previous messages:",messages);
-
     try {
       // Call backend API on the correct route
       const res = await axiosInstance.post("/chatbot/send", {
         message: text,
       });
-
-      console.log("backend response: ",res.data.aiResponse);
-      
 
       // Add bot response
       const botMessage = {
@@ -48,8 +42,12 @@ const Home = () => {
   };
 
   return (
-    <div className="flex flex-col min-h-[80vh]">
-      <ChatWindow messages={messages} loading={loading} />
+    <div className="flex flex-col h-screen">
+      <Navbar />
+      {/* Messages */}
+      <div className="flex-1 overflow-y-auto">
+        <ChatWindow messages={messages} loading={loading} />
+      </div>
       <ChatInput onSend={handleSend} />
     </div>
   );
