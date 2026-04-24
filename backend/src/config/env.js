@@ -12,7 +12,7 @@ export const env = {
     process.env.MONGODB_URI || "mongodb://localhost:27017/boilerplate",
 
   // Frontend
-  CLIENT_URL: process.env.CLIENT_URL || "http://localhost:5173",
+  CORS: process.env.CORS || "http://localhost:5173",
 
   // JWT Secrets
   ACCESS_TOKEN_SECRET: process.env.ACCESS_TOKEN_SECRET,
@@ -22,6 +22,9 @@ export const env = {
   ACCESS_TOKEN_EXPIRY: process.env.ACCESS_TOKEN_EXPIRY || "15m",
   REFRESH_TOKEN_EXPIRY: process.env.REFRESH_TOKEN_EXPIRY || "7d",
 
-  // OpenAI API
-  OPENAI_API_KEY: process.env.OPENAI_API_KEY || null,
+  // LLM Config
+  LLM_PROVIDER: process.env.LLM_PROVIDER || "groq", // or gemini
+  GROQ_API_KEY: process.env.GROQ_API_KEY,
+  GEMINI_API_KEY: process.env.GEMINI_API_KEY,
+  MAX_TOKENS: process.env.MAX_TOKENS || 200,
 };

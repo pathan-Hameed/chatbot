@@ -7,51 +7,56 @@ import ChatHistory from "../models/chatHistory.model.js";
  */
 export const callChatbotAPI = async (message) => {
   // If no API key, return mock response
-  if (!env.OPENAI_API_KEY) {
-    logger.warn("No OpenAI API key configured. Using mock responses.");
-    return getMockResponse(message);
+  if (!env.GROQ_API_KEY) {
+    console.log("No GROQ API key configured. Using mock responses.");
+    return getMockResponse("missing-field");
   }
 
   try {
-    // Call OpenAI Chat Completion API
-    const response = await fetch("https://api.openai.com/v1/chat/completions", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${env.OPENAI_API_KEY}`,
+    // Call GROQ Chat Completion API
+    const response = await fetch(
+      "https://api.groq.com/openai/v1/chat/completions",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${env.GROQ_API_KEY}`,
+        },
+        body: JSON.stringify({
+          model: "openai/gpt-oss-20b",
+          messages: [{ role: "user", content: message }],
+          max_tokens: 150,
+        }),
       },
-      body: JSON.stringify({
-        model: "gpt-3.5-turbo",
-        messages: [{ role: "user", content: message }],
-        max_tokens: 150,
-      }),
-    });
-    
-    const data = await response.json();
-    console.log("raw output form openai: ", data);
-    console.log("output from openai: ", data.choices[0].message.content);
-    
-    return data.choices[0].message.content;
+    );
 
+    const data = await response.json();
+    // console.log("raw output form openai: ", data);
+    // console.log("output from openai: ", data.choices[0].message.content);
+
+    return data.choices[0].message.content;
   } catch (error) {
     console.error("Chatbot API error:", error);
-    return getMockResponse(message);
+    return getMockResponse("api-failure");
   }
 };
 
 /**
  * Mock response (used when no API key is set or for testing)
  */
-const getMockResponse = (userMessage) => {
-  const responses = [
-    "That's an interesting question! Let me think about that.",
-    "I'd love to help you with that. Can you tell me more?",
-    "That makes sense. Here's what I think about it...",
-    "Good point! Here's my perspective on that.",
-    "I understand. Let me provide some insight on that.",
-  ];
-
-  return responses[Math.floor(Math.random() * responses.length)];
+const getMockResponse = (type) => {
+  if (type.toLowerCase().includes("api-failure")) {
+    return [
+      "Something went wrong with the chatbot API. Please try again later.",
+    ];
+  }
+  if (type.toLowerCase().includes("missing-field")) {
+    return [
+      "It seems like some required information is missing. Please provide all necessary details.",
+    ];
+  }
+  // Add more mock responses for different types if needed
+  return ["I'm sorry, I didn't understand that. Can you please rephrase?"];
 };
 
 /**
