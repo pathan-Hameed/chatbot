@@ -25,7 +25,7 @@ export const callChatbotAPI = async (message) => {
         body: JSON.stringify({
           model: "openai/gpt-oss-20b",
           messages: [{ role: "user", content: message }],
-          max_tokens: 150,
+          max_tokens: parseInt(env.MAX_TOKENS, 10),
         }),
       },
     );

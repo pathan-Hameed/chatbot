@@ -26,5 +26,5 @@ export const env = {
   LLM_PROVIDER: process.env.LLM_PROVIDER || "groq", // or gemini
   GROQ_API_KEY: process.env.GROQ_API_KEY,
   GEMINI_API_KEY: process.env.GEMINI_API_KEY,
-  MAX_TOKENS: process.env.MAX_TOKENS || 200,
+  MAX_TOKENS: process.env.MAX_TOKENS || 600,
 };
