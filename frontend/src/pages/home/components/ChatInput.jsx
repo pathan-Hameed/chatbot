@@ -13,16 +13,16 @@ const ChatInput = ({ onSend }) => {
   };
 
   return (
-    <div className="bg-white w-full p-4 flex items-center border-t">
+    <div className="bg-white w-2/3 flex items-center">
       <input
-        className="flex-1 border p-2 rounded"
+        className="flex-1 border rounded-full h-12"
         value={text}
         onChange={(e) => setText(e.target.value)}
         placeholder="Type your message..."
       />
 
       <button
-        className="ml-2 px-4 py-2 bg-blue-500 text-white rounded"
+        className="bg-blue-500 text-white rounded-full h-12 w-12 flex items-center justify-center"
         onClick={handleSubmit}
       >
         Send

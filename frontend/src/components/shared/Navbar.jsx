@@ -21,7 +21,7 @@ export default function Navbar() {
   };
 
   return (
-    <header className="sticky top-0 z-50 w-full bg-white/95 backdrop-blur mt-4 ">
+    <header className="sticky top-4 z-0 w-full bg-white/95 backdrop-blur">
       <div className="max-w-6xl mx-auto px-4 sm:px-6   flex items-center justify-between ">
         <Link to="/" className="font-bold text-xl tracking-tight text-gray-900">
           {APP_NAME}

@@ -1,17 +1,14 @@
 // pages/home/components/ChatWindow.jsx
-
 import MessageBubble from "./MessageBubble";
 
 const ChatWindow = ({ messages, loading }) => {
   return (
-    <div className="flex-1 p-4">
-      {/* Loop through messages */}
-      {messages.map((msg, index) => (
-        <MessageBubble key={index} message={msg} />
-      ))}
-
-      {/* Show loading indicator */}
-      {loading && <p className="text-gray-500">Bot is typing...</p>}
+    <div className="flex-1 overflow-y-auto border border-green-700 flex items-center justify-center z-10">
+      <div className="w-full max-w-3xl border-rose-700">
+        {messages.map((msg, index) => (
+          <MessageBubble key={index} message={msg} />
+        ))}
+      </div>
     </div>
   );
 };

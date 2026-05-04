@@ -42,13 +42,20 @@ const Home = () => {
   };
 
   return (
-    <div className="flex flex-col h-screen">
+    <div className="flex flex-col h-full">
       <Navbar />
+
       {/* Messages */}
-      <div className="flex-1 overflow-y-auto">
+      <div className="flex-1 overflow-y-auto flex items-center justify-center z-10">
         <ChatWindow messages={messages} loading={loading} />
       </div>
-      <ChatInput onSend={handleSend} />
+
+      <div className="border-t flex flex-col items-center justify-center p-4">
+        <ChatInput onSend={handleSend} />
+        <p className="text-center pb-4 text-xs text-gray-500">
+          Chatbot can make mistakes. Check important info
+        </p>
+      </div>
     </div>
   );
 };
